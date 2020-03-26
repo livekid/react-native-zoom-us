@@ -65,14 +65,12 @@
 /*!
  @brief admit the user go to meeting fram waiting room.
  @return the result of this operation.
- @warning Only meeting host/co-host can run the function.
  */
 - (BOOL)admitToMeeting:(NSUInteger)userId;
 
 /*!
  @brief put the user to waiting room from meeting.
  @return the result of this operation.
- @warning Only meeting host/co-host can run the function.
  */
 - (BOOL)putInWaitingRoom:(NSUInteger)userId;
 
