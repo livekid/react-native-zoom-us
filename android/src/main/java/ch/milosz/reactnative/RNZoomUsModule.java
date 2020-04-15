@@ -18,7 +18,9 @@ import us.zoom.sdk.StartMeetingOptions;
 import us.zoom.sdk.StartMeetingParamsWithoutLogin;
 import us.zoom.sdk.ZoomError;
 import us.zoom.sdk.ZoomSDK;
+import us.zoom.sdk.ZoomSDKInitParams;
 import us.zoom.sdk.ZoomSDKInitializeListener;
+import us.zoom.sdk.ZoomSDKRawDataMemoryMode;
 
 import static com.facebook.react.bridge.UiThreadUtil.runOnUiThread;
 
@@ -54,7 +56,14 @@ public class RNZoomUsModule extends ReactContextBaseJavaModule implements ZoomSD
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    ZoomSDK.getInstance().initialize(reactContext, appKey, appSecret, webDomain, RNZoomUsModule.this);
+                    ZoomSDKInitParams initParams = new ZoomSDKInitParams();
+                    initParams.enableLog = true;
+                    initParams.logSize = 50;
+                    initParams.appKey = appKey;
+                    initParams.appSecret = appSecret;
+                    initParams.domain = webDomain;
+                    initParams.videoRawDataMemoryMode = ZoomSDKRawDataMemoryMode.ZoomSDKRawDataMemoryModeStack;
+                    ZoomSDK.getInstance().initialize(reactContext, RNZoomUsModule.this, initParams);
                     isInitialized = true;
                 }
             });
